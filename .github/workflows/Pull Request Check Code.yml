@@ -16,3 +16,13 @@ jobs:
       - run: npm ci
 
       - run: npm run build
+
+  checks:
+    strategy:
+      matrix:
+        variant: [dev, prod]
+    uses: ./.github/workflows/_rover-subgraph-check.yml
+    secrets: inherit
+    with:
+      subgraph_name: subgraph-b # change to subgraph-b in that repo
+      variant: ${{ matrix.variant }}
